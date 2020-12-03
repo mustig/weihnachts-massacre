@@ -2,6 +2,7 @@
 
 import re
 import numpy as np
+import datetime
 
 def indatakrossen(fn):
     with open("data/{:s}".format(fn), "r") as filbunke:
@@ -44,4 +45,4 @@ if __name__ == "__main__":
         3: de_anima,
     }
 
-    problems[3]()
+    problems[datetime.datetime.today().day]()
