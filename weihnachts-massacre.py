@@ -13,7 +13,7 @@ def everscream():
     # Lol brute force orka krångla
     print([a*d*e for a in representationskontot for d in representationskontot[::-1] for e in representationskontot if a+d+e == 2020][0])
 
-def haigography_of_saint_nicholaus():
+def hagiography_of_saint_nicholaus():
     rules, passwords = zip(*[s.split(': ') for s in indatakrossen("2.txt")])
 
     def hard_presents(r):
@@ -40,7 +40,7 @@ def de_anima():
 if __name__ == "__main__":
     problems = {
         1: everscream,
-        2: haigography_of_saint_nicholaus,
+        2: hagiography_of_saint_nicholaus,
         3: de_anima,
     }
 
