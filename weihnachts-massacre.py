@@ -20,7 +20,7 @@ def haigography_of_saint_nicholaus():
 
   bag_o_presents = list(zip(map(hard_presents, rules), passwords))
   print(sum(1 for p, q in bag_o_presents if int(p[0]) <= q.count(p[2]) <= int(p[1])))
-  print(sum(1 for p, q in bag_o_presents if (p[2] in q[int(p[0])-1]) ^ (p[2] in q[int(p[1])-1])]))
+  print(sum(1 for p, q in bag_o_presents if (p[2] in q[int(p[0])-1]) ^ (p[2] in q[int(p[1])-1])))
 
 def de_anima():
   pass
