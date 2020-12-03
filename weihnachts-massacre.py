@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import re
+import numpy as np
 
 def indatakrossen(fn):
     with open("data/{:s}".format(fn), "r") as filbunke:
@@ -23,7 +24,18 @@ def haigography_of_saint_nicholaus():
     print(sum(1 for p, q in bag_o_presents if (p[2] in q[int(p[0])-1]) ^ (p[2] in q[int(p[1])-1])))
 
 def de_anima():
-    skidbacke = indatakrossen("3.txt")
+    skidbacke = np.array([list(w) for w in indatakrossen("3.txt")])
+    tall, tjocc = skidbacke.shape
+    def kraschtest(xskip, yskip):
+        x = y = trees = 0
+        while y < tall:
+            trees += '#' in skidbacke[y, x % tjocc]
+            x += xskip
+            y += yskip
+        return(trees)
+    backar = [(1, 1), (3, 1), (5, 1), (7, 1), (1, 2)]
+    print(np.product([kraschtest(*backe) for backe in backar]))
+
 
 if __name__ == "__main__":
     problems = {
