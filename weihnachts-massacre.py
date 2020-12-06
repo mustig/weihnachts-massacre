@@ -4,6 +4,7 @@ import re
 import numpy as np
 import datetime
 import bitstring
+from collections import Counter
 
 def indatakrossen(fn):
     with open("data/{:s}".format(fn), "r") as filbunke:
@@ -65,13 +66,29 @@ def gingerbread_house_destroyed_by_earthquake():
     ids = np.array(sorted([8*t[0]+t[1] for t in ticketz]))
     print(max(ids), ids[:-1][np.diff(ids) == 2] + 1)
 
+def enhanced_interrogation_techniques():
+    with open("data/6.txt", "r") as filbunke:
+        answers = ''.join([l for l in filbunke.readlines()]).split("\n\n")
+
+    passengers_in_group = [a.count('\n')+1 for a in answers]
+    passengers_in_group[-1] = passengers_in_group[-1] - 1 # Edge case
+    answers = [''.join((a.replace('\n', ''))) for a in answers]
+    unique_answers = [''.join(set(a.replace('\n', ''))) for a in answers]
+    print(sum(len(a) for a in unique_answers))
+
+    score = 0
+    for replies, n in zip(answers, passengers_in_group):
+        score += (sum(1 for v in Counter(replies).values() if v == n))
+    print(score)
+
 if __name__ == "__main__":
     problems = {
         1: everscream,
         2: hagiography_of_saint_nicholaus,
         3: de_anima,
         4: malfunctioning_reindeer_mech,
-        5: gingerbread_house_destroyed_by_earthquake
+        5: gingerbread_house_destroyed_by_earthquake,
+        6: enhanced_interrogation_techniques
     }
 
     problems[datetime.datetime.today().day]()
