@@ -3,6 +3,7 @@
 import re
 import numpy as np
 import datetime
+import bitstring
 
 def indatakrossen(fn):
     with open("data/{:s}".format(fn), "r") as filbunke:
@@ -56,13 +57,21 @@ def malfunctioning_reindeer_mech():
 
     print(sum(sum(tests[k](v) for k, v in p.items()) == 7 for p in fuck_cid))
 
+def gingerbread_house_destroyed_by_earthquake():
+    ticketz = [
+        (bitstring.Bits(bin=ticket[:7].replace('F', '0').replace('B', '1')).uint,
+        (bitstring.Bits(bin=ticket[7:].replace('L', '0').replace('R', '1')).uint))
+         for ticket in indatakrossen("5.txt") if len(ticket) == 10]
+    ids = np.array(sorted([8*t[0]+t[1] for t in ticketz]))
+    print(max(ids), ids[:-1][np.diff(ids) == 2] + 1)
 
 if __name__ == "__main__":
     problems = {
         1: everscream,
         2: hagiography_of_saint_nicholaus,
         3: de_anima,
-        4: malfunctioning_reindeer_mech
+        4: malfunctioning_reindeer_mech,
+        5: gingerbread_house_destroyed_by_earthquake
     }
 
     problems[datetime.datetime.today().day]()
